@@ -1,0 +1,118 @@
+import { Component, OnInit , ElementRef} from '@angular/core';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+
+import{BoardService} from '../services/trello.service'
+import {Task} from '../model/task'
+import {Board} from '../model/board'
+
+@Component({
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.css']
+})
+export class BoardComponent implements OnInit {
+  task:Task;
+  boards: Board[];
+  board: Board = new Board;
+  errorMessage: string;
+  addColumnText: string;
+   addingColumn = false;
+     boardWidth: number;
+  columnsAdded: number = 0;
+
+    editingTilte = false;
+  currentTitle: string;
+
+  constructor(public el: ElementRef,private _route: ActivatedRoute,private _boardService:BoardService) { }
+
+  ngOnInit() {
+    let boardId = this._route.snapshot.params['id'];
+    console.log(boardId);
+    this.boards = this._boardService._data;
+    console.log(this.boards);
+    for(let v of this.boards){
+      if(v.id == boardId){
+        this.board = v;
+      }
+    }
+    //this.updateBoardWidth();
+
+    /*this._boardService.getBoards()
+                .subscribe(boards => this.boards = boards,
+                           error => this.errorMessage = <any>error);*/
+
+  }
+  editTitle() {
+    this.currentTitle = this.board.title;
+    this.editingTilte = true;
+
+    let input = this.el.nativeElement
+      .getElementsByClassName('board-title')[0]
+      .getElementsByTagName('input')[0];
+
+    setTimeout(function () { input.focus(); }, 0);
+  }
+
+    enableAddColumn() {
+    this.addingColumn = true;
+    
+  }
+    updateBoard() {
+  
+    this.editingTilte = false;
+    document.title = this.board.title + " | Generic Task Manager";
+  }
+    blurOnEnter(event) {
+    if (event.keyCode === 13) {
+      event.target.blur();
+    }
+  }
+  addColumnOnEnter(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      if (this.addColumnText && this.addColumnText.trim() !== '') {
+        this.addColumn();
+      } else {
+        this.clearAddColumn();
+      }
+    }
+    else if (event.keyCode === 27) {
+      this.clearAddColumn();
+    }
+  }
+    clearAddColumn() {
+    this.addingColumn = false;
+    this.addColumnText = '';
+  }
+  addColumn() {
+    let newColumn = <Task>{
+      title: this.addColumnText,
+      order: (this.board.task.length + 1) * 1000,
+      boardId: this.board.id
+    };
+    this.board.task.push(newColumn);
+
+  }
+    updateBoardWidth() {
+    // this.boardWidth = ((this.board.columns.length + (this.columnsAdded > 0 ? 1 : 2)) * 280) + 10;
+    this.boardWidth = ((this.board.task.length + 1) * 280) + 10;
+
+    if (this.boardWidth > document.body.scrollWidth) {
+      document.getElementById('main').style.width = this.boardWidth + 'px';
+    } else {
+      document.getElementById('main').style.width = '100%';
+    }
+
+    if (this.columnsAdded > 0) {
+      let wrapper = document.getElementById('content-wrapper');
+      wrapper.scrollLeft = wrapper.scrollWidth;
+    }
+
+    this.columnsAdded++;
+  }
+  addColumnOnBlur() {
+    if (this.addColumnText && this.addColumnText.trim() !== '') {
+      this.addColumn();
+    }
+    this.clearAddColumn();
+  }
+}
