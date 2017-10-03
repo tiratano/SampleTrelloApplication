@@ -9,7 +9,11 @@
 </div>
 <section *ngIf="board" id="main" >
   <div *ngFor="let column of board.task " class="sortable-column">
-    {{column.title}}
+     <app-task [column]="column"
+        (onAddCard)="addCard($event)"
+        [cards]="board.cards">
+    </app-task>
+    
   </div>
   <div class="add-column"
        (click)="enableAddColumn()" >

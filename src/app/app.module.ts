@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { TaskheaderComponent } from './taskheader/taskheader.component';
+//import { TaskheaderComponent } from './taskheader/taskheader.component';
 import { TaskComponent } from './task/task.component';
 import { BoardComponent } from './board/board.component';
-import { BoardService } from './services/trello.service'
+import { BoardService } from './services/trello.service';
+import { SubtaskComponent } from './subtask/subtask.component'
 
 
 const appRoutes: Routes = [
@@ -22,9 +23,10 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomepageComponent,
-    TaskheaderComponent,
+   // TaskheaderComponent,
     TaskComponent,
-    BoardComponent
+    BoardComponent,
+    SubtaskComponent
   ],
   imports: [
     BrowserModule,

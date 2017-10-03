@@ -1,9 +1,11 @@
-import { Component, OnInit , ElementRef} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
-import{BoardService} from '../services/trello.service'
-import {Task} from '../model/task'
-import {Board} from '../model/board'
+import { BoardService } from '../services/trello.service'
+import { Task } from '../model/task'
+import { Board } from '../model/board'
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-board',
@@ -11,37 +13,38 @@ import {Board} from '../model/board'
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-  task:Task;
+  task: Task;
   boards: Board[];
   board: Board = new Board;
   errorMessage: string;
   addColumnText: string;
-   addingColumn = false;
-     boardWidth: number;
+  addingColumn = false;
+  boardWidth: number;
   columnsAdded: number = 0;
 
-    editingTilte = false;
+  editingTilte = false;
   currentTitle: string;
 
-  constructor(public el: ElementRef,private _route: ActivatedRoute,private _boardService:BoardService) { }
+  constructor(public el: ElementRef, private _route: ActivatedRoute, private _boardService: BoardService) { }
 
   ngOnInit() {
     let boardId = this._route.snapshot.params['id'];
     console.log(boardId);
     this.boards = this._boardService._data;
     console.log(this.boards);
-    for(let v of this.boards){
-      if(v.id == boardId){
+    for (let v of this.boards) {
+      if (v.id == boardId) {
         this.board = v;
       }
     }
-    //this.updateBoardWidth();
+    //  this.updateBoardWidth();
 
     /*this._boardService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);*/
 
   }
+
   editTitle() {
     this.currentTitle = this.board.title;
     this.editingTilte = true;
@@ -53,16 +56,21 @@ export class BoardComponent implements OnInit {
     setTimeout(function () { input.focus(); }, 0);
   }
 
-    enableAddColumn() {
+  enableAddColumn() {
     this.addingColumn = true;
-    
+    let input = this.el.nativeElement
+      .getElementsByClassName('add-column')[0]
+      .getElementsByTagName('input')[0];
+
+    setTimeout(function () { input.focus(); }, 0);
+
   }
-    updateBoard() {
-  
+  updateBoard() {
+
     this.editingTilte = false;
     document.title = this.board.title + " | Generic Task Manager";
   }
-    blurOnEnter(event) {
+  blurOnEnter(event) {
     if (event.keyCode === 13) {
       event.target.blur();
     }
@@ -79,21 +87,25 @@ export class BoardComponent implements OnInit {
       this.clearAddColumn();
     }
   }
-    clearAddColumn() {
+  clearAddColumn() {
     this.addingColumn = false;
     this.addColumnText = '';
   }
   addColumn() {
+    let newID = this.board.task.length + 1;
     let newColumn = <Task>{
       title: this.addColumnText,
-      order: (this.board.task.length + 1) * 1000,
-      boardId: this.board.id
+      id: newID
+      // order: (this.board.task.length + 1) * 1000,
+      //boardId: this.board.id
     };
     this.board.task.push(newColumn);
+    this.updateBoardWidth();
+    this.addColumnText = '';
 
   }
-    updateBoardWidth() {
-    // this.boardWidth = ((this.board.columns.length + (this.columnsAdded > 0 ? 1 : 2)) * 280) + 10;
+  updateBoardWidth() {
+    // this.boardWidth = ((this.board.task.length + (this.columnsAdded > 0 ? 1 : 2)) * 280) + 10;
     this.boardWidth = ((this.board.task.length + 1) * 280) + 10;
 
     if (this.boardWidth > document.body.scrollWidth) {

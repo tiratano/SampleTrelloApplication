@@ -1,7 +1,9 @@
+import {SubTask} from './subtask'
 export class Task {
-    id: string;
+    id: number;
     title: string;
-    taskheaderId: string;
-    boardId: string;
-    order: number;
+    subtask: SubTask[];
+    //boardId: string;
+    taskheaderId:string
+   // order: number;
 }
