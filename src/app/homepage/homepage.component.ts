@@ -26,6 +26,9 @@ export class HomepageComponent implements OnInit {
 
     //this.boards.push (this.seedData());
     //this.boards.push (this.seedData());
+    setTimeout(function() {
+      document.getElementById('content-wrapper').style.backgroundColor = "";
+    }, 100);
   }
 
   seedData(){
