@@ -37,9 +37,10 @@ export class BoardComponent implements OnInit {
     for (let v of this.boards) {
       if (v.id == boardId) {
         this.board = v;
+        break;
       }
     }
-   this.bindPane();
+  // this.bindPane();
     
     //  this.updateBoardWidth();
 

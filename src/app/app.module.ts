@@ -15,7 +15,8 @@ import { SubtaskComponent } from './subtask/subtask.component'
 
 
 const appRoutes: Routes = [
-  { path: 'board/:id', component: BoardComponent },
+  { path: 'board/:id', component: BoardComponent,pathMatch:"full" },
+  
   { path: '', component: HomepageComponent },
 ];
 

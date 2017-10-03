@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 import {Board} from '../model/board'
 import {SubTask} from '../model/subtask';
@@ -15,7 +16,7 @@ export class HomepageComponent implements OnInit {
   boards: Board[];
   errorMessage: string;
 
-  constructor(private _boardService:BoardService) { }
+  constructor(private _boardService:BoardService,private _router: Router) { }
 
   ngOnInit() {
     this.boards =[];
@@ -30,7 +31,17 @@ export class HomepageComponent implements OnInit {
       document.getElementById('content-wrapper').style.backgroundColor = "";
     }, 100);
   }
-
+public addBoard(){
+    console.log('Adding new board');
+    let newBoard:Board= new Board;
+    newBoard.id = this.boards.length + 1
+    newBoard.task = Array();
+    newBoard.title = "New Board";
+    this.boards.push(newBoard);
+      //  this._router.navigate(['/board',{id: newBoard.id}]);
+        console.log('new board added');
+  
+  }
   seedData(){
     let temptask: Task = new Task();
     let tempTaskHeader:SubTask =  new SubTask();
@@ -45,7 +56,7 @@ export class HomepageComponent implements OnInit {
     tempTaskHeader.id="1";
     tempTaskHeader.title = "Hello Task Header!!";
 
-    board.id="1";
+    board.id=1;
     board.task = new Array();
     board.task.push(temptask);
     //board.taskHeader = new Array();

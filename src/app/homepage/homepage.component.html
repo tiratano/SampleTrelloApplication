@@ -4,7 +4,7 @@
   <a class="board" *ngFor="let board of boards" [routerLink]="['/board', board.id]" >
     <span class="title">{{board?.title}}</span>
   </a>
-  <a href="#" class="board add-board">
+  <a href="#" class="board add-board" (click)="addBoard()">
     <span class="title">Create a new board...</span>
   </a>
 </div>
