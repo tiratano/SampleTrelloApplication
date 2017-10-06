@@ -1,7 +1,7 @@
 
 .boards-wrapper {
-  padding: 2em;
-  background-color: white;
+  padding: 10px;
+  background-color: rgb(147, 191, 192);
   min-height: calc(100% - 4em);
   display: inline-block;
 }
@@ -15,7 +15,7 @@ h2 {
 }
 
 .board {
-  background-color: #0079BF;
+  background-color: rgb(173, 51, 102);
   height: 72px;
   width: 280px;
   color: white;
