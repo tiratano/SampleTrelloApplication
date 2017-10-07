@@ -21,11 +21,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.boards =[];
 
-    this._boardService.getBoards()
+   /* this._boardService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);
-
-    //this.boards.push (this.seedData());
+*/
+    this.boards.push (this._boardService.seedData());
     //this.boards.push (this.seedData());
     
   }
@@ -40,31 +40,5 @@ public addBoard(){
         console.log('new board added');
   
   }
-  seedData(){
-    let temptask: Task = new Task();
-    let tempTaskHeader:SubTask =  new SubTask();
-    let board:Board=  new Board();
-
-    temptask.id = 1;
-    temptask.title = "Hello Task!!";
-    temptask.taskheaderId = "1";
-   // temptask.boardId = "1";
-    
-    //tempTaskHeader.boardId="1";
-    tempTaskHeader.id="1";
-    tempTaskHeader.title = "Hello Task Header!!";
-
-    temptask.subtask = Array();
-    temptask.subtask.push(tempTaskHeader);
-
-    board.id=1;
-    board.task = new Array();
-    board.task.push(temptask);
-    //board.taskHeader = new Array();
-    //board.taskHeader.push(tempTaskHeader);
-    board.title = "Hello Seed Board";
-
-    return board;
-    
-  }
+  
 }

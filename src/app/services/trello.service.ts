@@ -11,6 +11,7 @@ import 'rxjs/add/operator/filter';
 
 import { Board } from '../model/board';
 import { Task } from '../model/task';
+import { SubTask } from '../model/subtask';
 
 
 @Injectable()
@@ -43,5 +44,32 @@ export class BoardService {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
+    public seedData(){
+        let temptask: Task = new Task();
+        let tempSubTask:SubTask =  new SubTask();
+        let board:Board=  new Board();
+    
+        temptask.id = 1;
+        temptask.title = "Hello Task!!";
+        temptask.taskheaderId = "1";
+    
+        tempSubTask.id="1";
+        tempSubTask.title = "Hello Task Header!!";
+    
+        temptask.subtask = Array();
+        temptask.subtask.push(tempSubTask);
+        
+        board.id=1;
+        board.title = "Hello Seed Board";
+        board.task = new Array();
+        board.task.push(temptask);
+        
+
+        this.Boards = new Array();
+        this.Boards.push(board);
+
+        return board;
+        
+      }
 
 }
