@@ -35,7 +35,7 @@ export class TaskComponent implements OnInit {
   ngOnInit() {
     let boardId = this._route.snapshot.params['id'];
     console.log(boardId);
-    this.boards = this._boardService._data;
+    this.boards = this._boardService.Boards;
     console.log(this.boards);
     for(let v of this.boards){
       if(v.id == boardId){

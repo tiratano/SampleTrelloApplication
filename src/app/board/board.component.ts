@@ -32,7 +32,7 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     let boardId = this._route.snapshot.params['id'];
     console.log(boardId);
-    this.boards = this._boardService._data;
+    this.boards = this._boardService.Boards;
     console.log(this.boards);
     for (let v of this.boards) {
       if (v.id == boardId) {
@@ -74,6 +74,7 @@ export class BoardComponent implements OnInit {
 
     this.editingTilte = false;
     document.title = this.board.title + " | Generic Task Manager";
+    this._boardService.Boards.find(x=>x.id == this.board.id).title = this.board.title;
   }
   blurOnEnter(event) {
     if (event.keyCode === 13) {

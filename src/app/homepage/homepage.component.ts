@@ -21,15 +21,13 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.boards =[];
 
-    /*this._boardService.getBoards()
+    this._boardService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);
-*/
-    this.boards.push (this.seedData());
+
     //this.boards.push (this.seedData());
-    setTimeout(function() {
-      document.getElementById('content-wrapper').style.backgroundColor = "";
-    }, 100);
+    //this.boards.push (this.seedData());
+    
   }
 public addBoard(){
     console.log('Adding new board');

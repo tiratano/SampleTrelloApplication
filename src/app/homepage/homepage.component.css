@@ -16,15 +16,14 @@ h2 {
 
 .board {
   background-color: rgb(173, 51, 102);
-  height: 72px;
+  height: auto;
   width: 280px;
   color: white;
-  float: left;
-  margin-right: 16px;
-  margin-bottom: 16px;
+  float: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
   text-align: left;
   padding: 9pt 8px;
-  border-radius: 3px;
   text-decoration: none;
 }
 
