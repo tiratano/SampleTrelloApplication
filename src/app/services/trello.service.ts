@@ -15,7 +15,7 @@ import { SubTask } from '../model/subtask';
 
 
 @Injectable()
-export class BoardService {
+export class TrelloService {
     private _boardUrl = 'api/board/boards.json';
     public Boards: Board[];
     constructor(private _http: Http) {}

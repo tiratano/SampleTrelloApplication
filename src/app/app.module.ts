@@ -10,7 +10,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 //import { TaskheaderComponent } from './taskheader/taskheader.component';
 import { TaskComponent } from './task/task.component';
 import { BoardComponent } from './board/board.component';
-import { BoardService } from './services/trello.service';
+import { TrelloService } from './services/trello.service';
 import { SubtaskComponent } from './subtask/subtask.component'
 
 
@@ -35,7 +35,7 @@ const appRoutes: Routes = [
     FormsModule,
      RouterModule.forRoot(appRoutes)
   ],
-  providers: [BoardService],
+  providers: [TrelloService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

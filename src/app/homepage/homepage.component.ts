@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {Board} from '../model/board'
 import {SubTask} from '../model/subtask';
 import {Task} from '../model/task'
-import{BoardService} from '../services/trello.service'
+import{TrelloService} from '../services/trello.service'
 
 
 @Component({
@@ -13,19 +13,19 @@ import{BoardService} from '../services/trello.service'
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  boards: Board[];
+  boards: Board[]= Array();
   errorMessage: string;
 
-  constructor(private _boardService:BoardService,private _router: Router) { }
+  constructor(private _trelloService:TrelloService,private _router: Router) { }
 
   ngOnInit() {
-    this.boards =[];
+  //  this.boards =[];
 
-   /* this._boardService.getBoards()
+   /* this._trelloService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);
 */
-    this.boards.push (this._boardService.seedData());
+    this.boards.push (this._trelloService.seedData());
     //this.boards.push (this.seedData());
     
   }
@@ -36,8 +36,7 @@ public addBoard(){
     newBoard.task = Array();
     newBoard.title = "New Board";
     this.boards.push(newBoard);
-      //  this._router.navigate(['/board',{id: newBoard.id}]);
-        console.log('new board added');
+    console.log('new board added');
   
   }
   

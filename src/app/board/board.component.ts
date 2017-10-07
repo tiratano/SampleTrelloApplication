@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
-import { BoardService } from '../services/trello.service'
+import { TrelloService } from '../services/trello.service'
 import { Task } from '../model/task'
 import { Board } from '../model/board'
 
@@ -27,7 +27,7 @@ export class BoardComponent implements OnInit {
   editingTilte = false;
   currentTitle: string;
 
-  constructor(public el: ElementRef, private _route: ActivatedRoute, private _boardService: BoardService) { }
+  constructor(public el: ElementRef, private _route: ActivatedRoute, private _boardService: TrelloService) { }
 
   ngOnInit() {
     let boardId = this._route.snapshot.params['id'];
