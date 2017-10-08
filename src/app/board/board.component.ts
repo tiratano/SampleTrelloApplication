@@ -5,10 +5,6 @@ import { TrelloService } from '../services/trello.service'
 import { Task } from '../model/task'
 import { Board } from '../model/board'
 
-declare var jQuery: any;
-var curYPos = 0,
-  curXPos = 0,
-  curDown = false;
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -40,14 +36,6 @@ export class BoardComponent implements OnInit {
         break;
       }
     }
-  // this.bindPane();
-    
-    //  this.updateBoardWidth();
-
-    /*this._boardService.getBoards()
-                .subscribe(boards => this.boards = boards,
-                           error => this.errorMessage = <any>error);*/
-
   }
 
   editTitle() {
@@ -133,24 +121,5 @@ export class BoardComponent implements OnInit {
     }
     this.clearAddColumn();
   }
-    bindPane() {
-    let el = document.getElementById('content-wrapper');
-    el.addEventListener('mousemove', function (e) {
-      e.preventDefault();
-      if (curDown === true) {
-        el.scrollLeft += (curXPos - e.pageX) * .25;// x > 0 ? x : 0;
-        el.scrollTop += (curYPos - e.pageY) * .25;// y > 0 ? y : 0;
-      }
-    });
 
-    el.addEventListener('mousedown', function (e) {
-      if (e.srcElement.id === 'main' || e.srcElement.id === 'content-wrapper') {
-        curDown = true;
-      }
-      curYPos = e.pageY; curXPos = e.pageX;
-    });
-    el.addEventListener('mouseup', function (e) {
-      curDown = false;
-    });
-  }
 }

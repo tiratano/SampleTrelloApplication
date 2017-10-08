@@ -21,11 +21,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   //  this.boards =[];
 
-   /* this._trelloService.getBoards()
+    this._trelloService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);
-*/
-    this.boards.push (this._trelloService.seedData());
+
+    //this.boards.push (this._trelloService.seedData());
     //this.boards.push (this.seedData());
     
   }
