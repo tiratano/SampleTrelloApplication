@@ -16,10 +16,6 @@ export class TaskComponent implements OnInit {
   task: Task;
   @Input()
   subTasks: SubTask[];
-  @Output()
-  public onAddsubTask: EventEmitter<SubTask>;
-  @Output() subTaskUpdate: EventEmitter<SubTask>;
-
 
  boards: Board[];
   board: Board = new Board;
@@ -28,8 +24,6 @@ export class TaskComponent implements OnInit {
   addsubTaskText: string;
   currentTitle: string;
   constructor(private el: ElementRef,private _route: ActivatedRoute,private _boardService:TrelloService) { 
-     this.onAddsubTask = new EventEmitter();
-    this.subTaskUpdate = new EventEmitter();
   }
 
   ngOnInit() {
@@ -43,9 +37,6 @@ export class TaskComponent implements OnInit {
         break;
       }
     }
-    
-    this.subTasks =  this.task.subtask;
-    
   }
 
     addtaskOnEnter(event: KeyboardEvent) {
@@ -60,9 +51,6 @@ export class TaskComponent implements OnInit {
     this.subTasks = this.subTasks || [];
     let newsubTask = <SubTask>{
       title: this.addsubTaskText
-     // order: (this.subTasks.length + 1) * 1000,
-      //taskId: this.task._id,
-     // boardId: this.task.boardId
     };
      let selectedtask: Task;
       for(let v of this.board.task){
@@ -76,12 +64,7 @@ export class TaskComponent implements OnInit {
     }
     selectedtask.subtask.push(newsubTask);
     this.subTasks = selectedtask.subtask;
-    //this._ws.addsubTask("123",newsubTask);
- //   this._subTaskService.post(newsubTask)
-   //   .subscribe(subTask => {
-     //   this.onAddsubTask.emit(subTask);
-      //  this._ws.addsubTask(subTask.boardId, subTask);
-      //});
+
   }
 
   addsubTaskOnEnter(event: KeyboardEvent) {
@@ -154,8 +137,5 @@ updatetask() {
     this.addsubTaskText = '';
   }
 
-  onsubTaskUpdate(subTask: SubTask){
-    this.subTaskUpdate.emit(subTask);
-  }
 
 }

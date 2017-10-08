@@ -12,12 +12,10 @@ export class SubtaskComponent implements OnInit {
 
 @Input()
   subTask: SubTask;
-  @Output() subTaskUpdate: EventEmitter<SubTask>;
   editingsubTask = false;
   currentTitle: string;
   zone: NgZone;
   constructor(private el: ElementRef) {
-     this.subTaskUpdate = new EventEmitter();
   }
 
   ngOnInit() {

@@ -2,9 +2,9 @@
     [attr.task-id]="task._id"
     [attr.task-order]="task.order">
     <div class="task-header">
-        <h4 [innerHtml]="task.title"
+        <h4 
             [style.display]="editingtask ?'none' : '' "
-            (click)="edittask()" ></h4>
+            (click)="edittask()" >{{task.title}}</h4>
         <input  
             [style.display]="editingtask ?'' : 'none' "
             (blur)="updatetaskOnBlur()"
