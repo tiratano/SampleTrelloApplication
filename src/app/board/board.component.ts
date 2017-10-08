@@ -31,6 +31,10 @@ export class BoardComponent implements OnInit {
     this.board = this._trelloService.Boards.find(x=> x.id == boardId);
   }
 
+  addsubTask(event){
+    console.log("Event Fired");
+    console.log(event);
+  }
   editTitle() {
     this.currentTitle = this.board.title;
     this.editingTilte = true;

@@ -10,6 +10,7 @@
 <section *ngIf="board" id="main" >
   <div *ngFor="let task of board.task " class="sortable-task">
      <app-task [task]="task"
+        (onAddsubTask)="addsubTask($event)"
         [subTasks]="task.subtask">
     </app-task>
     

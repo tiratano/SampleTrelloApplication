@@ -16,6 +16,10 @@ export class TaskComponent implements OnInit {
   task: Task;
   @Input()
   subTasks: SubTask[];
+  @Output()
+  public onAddsubTask: EventEmitter<SubTask>;
+ // @Output() subTaskUpdate: EventEmitter<SubTask>;
+
 
  boards: Board[];
   board: Board = new Board;
@@ -24,6 +28,8 @@ export class TaskComponent implements OnInit {
   addsubTaskText: string;
   currentTitle: string;
   constructor(private el: ElementRef,private _route: ActivatedRoute,private _boardService:TrelloService) { 
+     this.onAddsubTask = new EventEmitter();
+    //this.subTaskUpdate = new EventEmitter();
   }
 
   ngOnInit() {
@@ -64,7 +70,7 @@ export class TaskComponent implements OnInit {
     }
     selectedtask.subtask.push(newsubTask);
     this.subTasks = selectedtask.subtask;
-
+    this.onAddsubTask.emit(newsubTask);
   }
 
   addsubTaskOnEnter(event: KeyboardEvent) {
