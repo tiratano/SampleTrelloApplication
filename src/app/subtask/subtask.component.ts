@@ -11,13 +11,13 @@ import {SubTask} from '../model/subtask'
 export class SubtaskComponent implements OnInit {
 
 @Input()
-  card: SubTask;
-  @Output() cardUpdate: EventEmitter<SubTask>;
-  editingCard = false;
+  subTask: SubTask;
+  @Output() subTaskUpdate: EventEmitter<SubTask>;
+  editingsubTask = false;
   currentTitle: string;
   zone: NgZone;
   constructor(private el: ElementRef) {
-     this.cardUpdate = new EventEmitter();
+     this.subTaskUpdate = new EventEmitter();
   }
 
   ngOnInit() {
@@ -26,14 +26,14 @@ export class SubtaskComponent implements OnInit {
     if (event.keyCode === 13) {
       event.target.blur();
     } else if (event.keyCode === 27) {
-      this.card.title = this.currentTitle;
-      this.editingCard = false;
+      this.subTask.title = this.currentTitle;
+      this.editingsubTask = false;
     }
   }
 
-  editCard() {
-    this.editingCard = true;
-    this.currentTitle = this.card.title;
+  editsubTask() {
+    this.editingsubTask = true;
+    this.currentTitle = this.subTask.title;
 
     let textArea = this.el.nativeElement.getElementsByTagName('textarea')[0];
 
@@ -42,20 +42,20 @@ export class SubtaskComponent implements OnInit {
     }, 0);
   }
 
-  updateCard() {
-    if (!this.card.title || this.card.title.trim() === '') {
-      this.card.title = this.currentTitle;
+  updatesubTask() {
+    if (!this.subTask.title || this.subTask.title.trim() === '') {
+      this.subTask.title = this.currentTitle;
     }
 
-    //this._cardService.put(this.card).then(res => {
-      //this._ws.updateCard(this.card.boardId, this.card);
+    //this._subTaskService.put(this.subTask).then(res => {
+      //this._ws.updatesubTask(this.subTask.boardId, this.subTask);
     //});
-    this.editingCard = false;
+    this.editingsubTask = false;
   }
 
   //TODO: check lifecycle
   private ngOnDestroy() {
-    //this._ws.onCardUpdate.unsubscribe();
+    //this._ws.onsubTaskUpdate.unsubscribe();
   }
 
 }

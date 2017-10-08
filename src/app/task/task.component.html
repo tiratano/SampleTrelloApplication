@@ -1,32 +1,32 @@
-<div class="column" 
-    [attr.column-id]="column._id"
-    [attr.column-order]="column.order">
-    <div class="column-header">
-        <h4 [innerHtml]="column.title"
-            [style.display]="editingColumn ?'none' : '' "
-            (click)="editColumn()" ></h4>
+<div class="task" 
+    [attr.task-id]="task._id"
+    [attr.task-order]="task.order">
+    <div class="task-header">
+        <h4 [innerHtml]="task.title"
+            [style.display]="editingtask ?'none' : '' "
+            (click)="edittask()" ></h4>
         <input  
-            [style.display]="editingColumn ?'' : 'none' "
-            (blur)="updateColumnOnBlur()"
-            (keyup)="addColumnOnEnter($event)"
-            [(ngModel)]="column.title" />
+            [style.display]="editingtask ?'' : 'none' "
+            (blur)="updatetaskOnBlur()"
+            (keyup)="addtaskOnEnter($event)"
+            [(ngModel)]="task.title" />
     </div>
-    <ul class="card-list" [attr.column-id]="column._id">
-        <li *ngFor="let card of cards  ">
-            <app-subtask [card]="card"></app-subtask>
+    <ul class="subTask-list" [attr.task-id]="task._id">
+        <li *ngFor="let subTask of subTasks  ">
+            <app-subtask [subTask]="subTask"></app-subtask>
         </li>
     </ul>
-        <div class="add-card" 
-            (click)="enableAddCard()" >
-            <span [style.display]="addingCard ? 'none' : ''" >
-                Add a card...
+        <div class="add-subTask" 
+            (click)="enableAddsubTask()" >
+            <span [style.display]="addingsubTask ? 'none' : ''" >
+                Add a subTask...
             </span>
             
             <input  
-            [style.display]="addingCard ? '' : 'none' "
-            [attr.autofocus]="addingCard"
-            (keyup)="addCardOnEnter($event)"
-            (blur)="addCardOnBlur()"
-            [(ngModel)]="addCardText" />
+            [style.display]="addingsubTask ? '' : 'none' "
+            [attr.autofocus]="addingsubTask"
+            (keyup)="addsubTaskOnEnter($event)"
+            (blur)="addsubTaskOnBlur()"
+            [(ngModel)]="addsubTaskText" />
         </div>
 </div>

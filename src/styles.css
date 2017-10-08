@@ -31,7 +31,7 @@ a {
 }
 
 
-li.card-placeholder {
+li.subTask-placeholder {
   list-style: none;
   width: calc(100% - 5px);
   height: 30px;
@@ -49,7 +49,7 @@ li.card-placeholder {
   opacity: 0.9;
 }
 
-.column-placeholder {
+.task-placeholder {
       width: 280px;
     height: 280px;
     background-color: #0067A3;

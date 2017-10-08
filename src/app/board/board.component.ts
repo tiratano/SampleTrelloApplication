@@ -15,10 +15,10 @@ export class BoardComponent implements OnInit {
   boards: Board[];
   board: Board = new Board;
   errorMessage: string;
-  addColumnText: string;
-  addingColumn = false;
+  addtaskText: string;
+  addingtask = false;
   boardWidth: number;
-  columnsAdded: number = 0;
+  tasksAdded: number = 0;
 
   editingTilte = false;
   currentTitle: string;
@@ -49,10 +49,10 @@ export class BoardComponent implements OnInit {
     setTimeout(function () { input.focus(); }, 0);
   }
 
-  enableAddColumn() {
-    this.addingColumn = true;
+  enableAddtask() {
+    this.addingtask = true;
     let input = this.el.nativeElement
-      .getElementsByClassName('add-column')[0]
+      .getElementsByClassName('add-task')[0]
       .getElementsByTagName('input')[0];
 
     setTimeout(function () { input.focus(); }, 0);
@@ -69,37 +69,37 @@ export class BoardComponent implements OnInit {
       event.target.blur();
     }
   }
-  addColumnOnEnter(event: KeyboardEvent) {
+  addtaskOnEnter(event: KeyboardEvent) {
     if (event.keyCode === 13) {
-      if (this.addColumnText && this.addColumnText.trim() !== '') {
-        this.addColumn();
+      if (this.addtaskText && this.addtaskText.trim() !== '') {
+        this.addtask();
       } else {
-        this.clearAddColumn();
+        this.clearAddtask();
       }
     }
     else if (event.keyCode === 27) {
-      this.clearAddColumn();
+      this.clearAddtask();
     }
   }
-  clearAddColumn() {
-    this.addingColumn = false;
-    this.addColumnText = '';
+  clearAddtask() {
+    this.addingtask = false;
+    this.addtaskText = '';
   }
-  addColumn() {
+  addtask() {
     let newID = this.board.task.length + 1;
-    let newColumn = <Task>{
-      title: this.addColumnText,
+    let newtask = <Task>{
+      title: this.addtaskText,
       id: newID
       // order: (this.board.task.length + 1) * 1000,
       //boardId: this.board.id
     };
-    this.board.task.push(newColumn);
+    this.board.task.push(newtask);
     this.updateBoardWidth();
-    this.addColumnText = '';
+    this.addtaskText = '';
 
   }
   updateBoardWidth() {
-    // this.boardWidth = ((this.board.task.length + (this.columnsAdded > 0 ? 1 : 2)) * 280) + 10;
+    // this.boardWidth = ((this.board.task.length + (this.tasksAdded > 0 ? 1 : 2)) * 280) + 10;
     this.boardWidth = ((this.board.task.length + 1) * 280) + 10;
 
     if (this.boardWidth > document.body.scrollWidth) {
@@ -108,18 +108,18 @@ export class BoardComponent implements OnInit {
       document.getElementById('main').style.width = '100%';
     }
 
-    if (this.columnsAdded > 0) {
+    if (this.tasksAdded > 0) {
       let wrapper = document.getElementById('content-wrapper');
       wrapper.scrollLeft = wrapper.scrollWidth;
     }
 
-    this.columnsAdded++;
+    this.tasksAdded++;
   }
-  addColumnOnBlur() {
-    if (this.addColumnText && this.addColumnText.trim() !== '') {
-      this.addColumn();
+  addtaskOnBlur() {
+    if (this.addtaskText && this.addtaskText.trim() !== '') {
+      this.addtask();
     }
-    this.clearAddColumn();
+    this.clearAddtask();
   }
 
 }

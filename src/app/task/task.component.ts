@@ -13,23 +13,23 @@ import {Board} from '../model/board'
 })
 export class TaskComponent implements OnInit {
  @Input()
-  column: Task;
+  task: Task;
   @Input()
-  cards: SubTask[];
+  subTasks: SubTask[];
   @Output()
-  public onAddCard: EventEmitter<SubTask>;
-  @Output() cardUpdate: EventEmitter<SubTask>;
+  public onAddsubTask: EventEmitter<SubTask>;
+  @Output() subTaskUpdate: EventEmitter<SubTask>;
 
 
  boards: Board[];
   board: Board = new Board;
-  editingColumn = false;
-  addingCard = false;
-  addCardText: string;
+  editingtask = false;
+  addingsubTask = false;
+  addsubTaskText: string;
   currentTitle: string;
   constructor(private el: ElementRef,private _route: ActivatedRoute,private _boardService:TrelloService) { 
-     this.onAddCard = new EventEmitter();
-    this.cardUpdate = new EventEmitter();
+     this.onAddsubTask = new EventEmitter();
+    this.subTaskUpdate = new EventEmitter();
   }
 
   ngOnInit() {
@@ -44,29 +44,29 @@ export class TaskComponent implements OnInit {
       }
     }
     
-    this.cards =  this.column.subtask;
+    this.subTasks =  this.task.subtask;
     
   }
 
-    addColumnOnEnter(event: KeyboardEvent) {
+    addtaskOnEnter(event: KeyboardEvent) {
     if (event.keyCode === 13) {
-      this.updateColumn();
+      this.updatetask();
     } else if (event.keyCode === 27) {
-      this.cleadAddColumn();
+      this.cleadAddtask();
     }
   }
 
-    addCard() {
-    this.cards = this.cards || [];
-    let newCard = <SubTask>{
-      title: this.addCardText
-     // order: (this.cards.length + 1) * 1000,
-      //columnId: this.column._id,
-     // boardId: this.column.boardId
+    addsubTask() {
+    this.subTasks = this.subTasks || [];
+    let newsubTask = <SubTask>{
+      title: this.addsubTaskText
+     // order: (this.subTasks.length + 1) * 1000,
+      //taskId: this.task._id,
+     // boardId: this.task.boardId
     };
      let selectedtask: Task;
       for(let v of this.board.task){
-      if(v.id == this.column.id){
+      if(v.id == this.task.id){
         selectedtask = v;
         break;
       }
@@ -74,88 +74,88 @@ export class TaskComponent implements OnInit {
     if(selectedtask.subtask == undefined){
       selectedtask.subtask = new Array();
     }
-    selectedtask.subtask.push(newCard);
-    this.cards = selectedtask.subtask;
-    //this._ws.addCard("123",newCard);
- //   this._cardService.post(newCard)
-   //   .subscribe(card => {
-     //   this.onAddCard.emit(card);
-      //  this._ws.addCard(card.boardId, card);
+    selectedtask.subtask.push(newsubTask);
+    this.subTasks = selectedtask.subtask;
+    //this._ws.addsubTask("123",newsubTask);
+ //   this._subTaskService.post(newsubTask)
+   //   .subscribe(subTask => {
+     //   this.onAddsubTask.emit(subTask);
+      //  this._ws.addsubTask(subTask.boardId, subTask);
       //});
   }
 
-  addCardOnEnter(event: KeyboardEvent) {
+  addsubTaskOnEnter(event: KeyboardEvent) {
     if (event.keyCode === 13) {
-      if (this.addCardText && this.addCardText.trim() !== '') {
-        this.addCard();
-        this.addCardText = '';
+      if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
+        this.addsubTask();
+        this.addsubTaskText = '';
       } else {
-        this.clearAddCard();
+        this.clearAddsubTask();
       }
     } else if (event.keyCode === 27) {
-      this.clearAddCard();
+      this.clearAddsubTask();
     }
   }
-updateColumn() {
-    if (this.column.title && this.column.title.trim() !== '') {
-     // this._columnService.put(this.column).then(res => {
-       // this._ws.updateColumn(this.column.boardId, this.column);
+updatetask() {
+    if (this.task.title && this.task.title.trim() !== '') {
+     // this._taskService.put(this.task).then(res => {
+       // this._ws.updatetask(this.task.boardId, this.task);
       //});
-      this.editingColumn = false;
+      this.editingtask = false;
     } else {
-      this.cleadAddColumn();
+      this.cleadAddtask();
     }
   }
 
-  cleadAddColumn() {
-    this.column.title = this.currentTitle;
-    this.editingColumn = false;
+  cleadAddtask() {
+    this.task.title = this.currentTitle;
+    this.editingtask = false;
   }
 
-  editColumn() {
-    this.currentTitle = this.column.title;
-    this.editingColumn = true;
+  edittask() {
+    this.currentTitle = this.task.title;
+    this.editingtask = true;
     let input = this.el.nativeElement
-      .getElementsByClassName('column-header')[0]
+      .getElementsByClassName('task-header')[0]
       .getElementsByTagName('input')[0];
 
     setTimeout(function() { input.focus(); }, 0);
   }
 
-  enableAddCard() {
-    this.addingCard = true;
+  enableAddsubTask() {
+    this.addingsubTask = true;
     let input = this.el.nativeElement
-      .getElementsByClassName('add-card')[0]
+      .getElementsByClassName('add-subTask')[0]
       .getElementsByTagName('input')[0];
 
     setTimeout(function() { input.focus(); }, 0);
   }
 
 
-  updateColumnOnBlur() {
-    if (this.editingColumn) {
-      this.updateColumn();
-      this.clearAddCard();
+  updatetaskOnBlur() {
+    if (this.editingtask) {
+      this.updatetask();
+      this.clearAddsubTask();
     }
   }
 
 
-  addCardOnBlur() {
-    if (this.addingCard) {
-      if (this.addCardText && this.addCardText.trim() !== '') {
-        this.addCard();
+  addsubTaskOnBlur() {
+    if (this.addingsubTask) {
+      if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
+        this.addsubTask();
       }
     }
-    this.clearAddCard();
+    this.clearAddsubTask();
   }
 
-  clearAddCard() {
-    this.addingCard = false;
-    this.addCardText = '';
+  clearAddsubTask() {
+    this.addingsubTask = false;
+    this.addsubTaskText = '';
   }
 
-  onCardUpdate(card: SubTask){
-    this.cardUpdate.emit(card);
+  onsubTaskUpdate(subTask: SubTask){
+    this.subTaskUpdate.emit(subTask);
   }
 
 }

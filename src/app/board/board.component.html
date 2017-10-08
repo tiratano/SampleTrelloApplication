@@ -8,21 +8,21 @@
     [(ngModel)]="board.title" /> 
 </div>
 <section *ngIf="board" id="main" >
-  <div *ngFor="let column of board.task " class="sortable-column">
-     <app-task [column]="column"
-        (onAddCard)="addCard($event)"
-        [cards]="board.cards">
+  <div *ngFor="let task of board.task " class="sortable-task">
+     <app-task [task]="task"
+        (onAddsubTask)="addsubTask($event)"
+        [subTasks]="board.subTasks">
     </app-task>
     
   </div>
-  <div class="add-column"
-       (click)="enableAddColumn()" >
-  	<span [style.display]="addingColumn ? 'none' : ''" >Add a list...</span>
+  <div class="add-task"
+       (click)="enableAddtask()" >
+  	<span [style.display]="addingtask ? 'none' : ''" >Add a list...</span>
    
     <input  
-	    [style.display]="addingColumn ? '' : 'none' "
-	    (keyup)="addColumnOnEnter($event)"
-	    (blur)="addColumnOnBlur()"
-	    [(ngModel)]="addColumnText" />
+	    [style.display]="addingtask ? '' : 'none' "
+	    (keyup)="addtaskOnEnter($event)"
+	    (blur)="addtaskOnBlur()"
+	    [(ngModel)]="addtaskText" />
   </div>
 </section>

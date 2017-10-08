@@ -1,4 +1,4 @@
-.card {
+.subTask {
   background-color: #fff;   
   text-decoration: none;
   padding: 7px;
@@ -23,11 +23,11 @@
   transition-timing-function: ease;
 }
 
-.card:hover{
+.subTask:hover{
   background-color: #ddd;
 }
 
-.card textarea {
+.subTask textarea {
     display: inherit;
     width: 100%;
     border: none;
