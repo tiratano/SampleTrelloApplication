@@ -21,11 +21,18 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   //  this.boards =[];
 
-    this._trelloService.getBoards()
+   /* this._trelloService.getBoards()
                 .subscribe(boards => this.boards = boards,
-                           error => this.errorMessage = <any>error);
-
-    //this.boards.push (this._trelloService.seedData());
+                           error => this.errorMessage = <any>error);*/
+   // if(this._trelloService.Boards == undefined){
+          this._trelloService.getBoardsWithPromises()
+                        .then(boards => this.boards = boards,
+                          error => this.errorMessage = <any>error);
+               //   }
+    //else{
+      //this.boards = this._trelloService.Boards;
+    //}
+      //this.boards.push (this._trelloService.seedData());
     //this.boards.push (this.seedData());
     
   }

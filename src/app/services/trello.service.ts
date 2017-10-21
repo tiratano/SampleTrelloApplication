@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
-
+import 'rxjs/add/operator/toPromise';
 
 
 import { Board } from '../model/board';
@@ -32,7 +32,22 @@ export class TrelloService {
         }
     }
 
-        getTask(id:string): Observable<Task> {
+
+
+    getBoardsWithPromises(): Promise<Board[]> {
+        if(this.Boards == undefined){
+        return this._http.get(this._boardUrl).toPromise()
+            .then((response: Response) => {
+                this.Boards = <Board[]>response.json(); 
+                return <Board[]> response.json()   ;       } );
+          
+        }
+        else {
+            return Promise.resolve(this.Boards);
+        }
+    }
+     
+    getTask(id:string): Observable<Task> {
         return this._http.get(this._boardUrl)
             .map((response: Response) => <Board[]> response.json())
             //.filter(data => data[0].task[0].id === id)
@@ -73,3 +88,4 @@ export class TrelloService {
       }
 
 }
+
