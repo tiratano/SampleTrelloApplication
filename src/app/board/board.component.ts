@@ -16,7 +16,6 @@ export class BoardComponent implements OnInit {
   board: Board = new Board;
   errorMessage: string;
   addtaskText: string;
-  addingtask = false;
   boardWidth: number;
   tasksAdded: number = 0;
 
@@ -47,7 +46,6 @@ export class BoardComponent implements OnInit {
   }
 
   enableAddtask() {
-    this.addingtask = true;
     let input = this.el.nativeElement
       .getElementsByClassName('add-task')[0]
       .getElementsByTagName('input')[0];
@@ -79,7 +77,6 @@ export class BoardComponent implements OnInit {
     }
   }
   clearAddtask() {
-    this.addingtask = false;
     this.addtaskText = '';
   }
   addtask() {

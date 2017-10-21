@@ -17,12 +17,11 @@
   </div>
   <div class="add-task"
        (click)="enableAddtask()" >
-  	<span [style.display]="addingtask ? 'none' : ''" >Add a list...</span>
-   
     <input  
-	    [style.display]="addingtask ? '' : 'none' "
+	    
 	    (keyup)="addtaskOnEnter($event)"
 	    (blur)="addtaskOnBlur()"
-	    [(ngModel)]="addtaskText" />
+      [(ngModel)]="addtaskText"
+      placeholder="Add a task" />
   </div>
 </section>
