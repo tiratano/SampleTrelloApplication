@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import {  Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute } from '@angular/router';
 
 import { TrelloService } from '../services/trello.service'
 import { Task } from '../model/task'
@@ -19,7 +19,7 @@ export class BoardComponent implements OnInit {
   boardWidth: number;
   tasksAdded: number = 0;
 
-  editingTilte = false;
+  editingTitle = false;
   currentTitle: string;
 
   constructor(public el: ElementRef, private _route: ActivatedRoute, private _trelloService: TrelloService) { }
@@ -27,16 +27,16 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     let boardId = this._route.snapshot.params['id'];
     console.log(boardId);
-    this.board = this._trelloService.Boards.find(x=> x.id == boardId);
+    this.board = this._trelloService.Boards.find(x => x.id == boardId);
   }
 
-  addsubTask(event){
+  addsubTask(event) {
     console.log("Event Fired");
     console.log(event);
   }
   editTitle() {
     this.currentTitle = this.board.title;
-    this.editingTilte = true;
+    this.editingTitle = true;
 
     let input = this.el.nativeElement
       .getElementsByClassName('board-title')[0]
@@ -55,13 +55,17 @@ export class BoardComponent implements OnInit {
   }
   updateBoard() {
 
-    this.editingTilte = false;
+    this.editingTitle = false;
     document.title = this.board.title + " | Generic Task Manager";
-    this._trelloService.Boards.find(x=>x.id == this.board.id).title = this.board.title;
+    this._trelloService.Boards.find(x => x.id == this.board.id).title = this.board.title;
   }
   blurOnEnter(event) {
     if (event.keyCode === 13) {
       event.target.blur();
+    }
+    else if (event.keyCode === 27) {
+      this.board.title = this.currentTitle;
+      this.editingTitle = false;
     }
   }
   addtaskOnEnter(event: KeyboardEvent) {

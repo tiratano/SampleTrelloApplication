@@ -1,14 +1,14 @@
 <div *ngIf="board" class="board-title">
-  <span [style.display]="editingTilte ? 'none' : ''" (click)="editTitle()">{{ board?.title }}</span>
+  <span [style.display]="editingTitle ? 'none' : ''" (click)="editTitle()">{{ board?.title }}</span>
 
    <input  
-    [style.display]="editingTilte ? '' : 'none' "
+    [style.display]="editingTitle ? '' : 'none' "
     (keyup)="blurOnEnter($event)"
     (blur)="updateBoard()"
     [(ngModel)]="board.title" /> 
 </div>
 <section *ngIf="board" id="main" >
-  <div *ngFor="let task of board.task " class="sortable-task">
+  <div *ngFor="let task of board.task  | customSort" class="sortable-task">
      <app-task [task]="task"
         (onAddsubTask)="addsubTask($event)"
         [subTasks]="task.subtask">

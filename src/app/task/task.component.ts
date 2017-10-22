@@ -1,10 +1,10 @@
-import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter, ElementRef} from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, ElementRef } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
-import{TrelloService} from '../services/trello.service'
-import {Task} from '../model/task'
-import {SubTask} from '../model/subtask'
-import {Board} from '../model/board'
+import { TrelloService } from '../services/trello.service'
+import { Task } from '../model/task'
+import { SubTask } from '../model/subtask'
+import { Board } from '../model/board'
 
 @Component({
   selector: 'app-task',
@@ -12,24 +12,20 @@ import {Board} from '../model/board'
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
- @Input()
+  @Input()
   task: Task;
   @Input()
   subTasks: SubTask[];
   @Output()
   public onAddsubTask: EventEmitter<SubTask>;
- // @Output() subTaskUpdate: EventEmitter<SubTask>;
 
-
- boards: Board[];
+  boards: Board[];
   board: Board = new Board;
   editingtask = false;
-  addingsubTask = false;
   addsubTaskText: string;
   currentTitle: string;
-  constructor(private el: ElementRef,private _route: ActivatedRoute,private _boardService:TrelloService) { 
-     this.onAddsubTask = new EventEmitter();
-    //this.subTaskUpdate = new EventEmitter();
+  constructor(private el: ElementRef, private _route: ActivatedRoute, private _boardService: TrelloService) {
+    this.onAddsubTask = new EventEmitter();
   }
 
   ngOnInit() {
@@ -37,15 +33,15 @@ export class TaskComponent implements OnInit {
     console.log(boardId);
     this.boards = this._boardService.Boards;
     console.log(this.boards);
-    for(let v of this.boards){
-      if(v.id == boardId){
+    for (let v of this.boards) {
+      if (v.id == boardId) {
         this.board = v;
         break;
       }
     }
   }
 
-    addtaskOnEnter(event: KeyboardEvent) {
+  addtaskOnEnter(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.updatetask();
     } else if (event.keyCode === 27) {
@@ -53,19 +49,20 @@ export class TaskComponent implements OnInit {
     }
   }
 
-    addsubTask() {
+  addsubTask() {
     this.subTasks = this.subTasks || [];
     let newsubTask = <SubTask>{
       title: this.addsubTaskText
     };
-     let selectedtask: Task;
-      for(let v of this.board.task){
-      if(v.id == this.task.id){
+    let selectedtask: Task;
+    for (let v of this.board.task) {
+      if (v.id == this.task.id) {
         selectedtask = v;
         break;
       }
     }
-    if(selectedtask.subtask == undefined){
+
+    if (selectedtask.subtask == undefined) {
       selectedtask.subtask = new Array();
     }
     selectedtask.subtask.push(newsubTask);
@@ -85,11 +82,8 @@ export class TaskComponent implements OnInit {
       this.clearAddsubTask();
     }
   }
-updatetask() {
+  updatetask() {
     if (this.task.title && this.task.title.trim() !== '') {
-     // this._taskService.put(this.task).then(res => {
-       // this._ws.updatetask(this.task.boardId, this.task);
-      //});
       this.editingtask = false;
     } else {
       this.cleadAddtask();
@@ -108,16 +102,15 @@ updatetask() {
       .getElementsByClassName('task-header')[0]
       .getElementsByTagName('input')[0];
 
-    setTimeout(function() { input.focus(); }, 0);
+    setTimeout(function () { input.focus(); }, 0);
   }
 
   enableAddsubTask() {
-    this.addingsubTask = true;
     let input = this.el.nativeElement
       .getElementsByClassName('add-subTask')[0]
       .getElementsByTagName('input')[0];
 
-    setTimeout(function() { input.focus(); }, 0);
+    setTimeout(function () { input.focus(); }, 0);
   }
 
 
@@ -130,18 +123,13 @@ updatetask() {
 
 
   addsubTaskOnBlur() {
-    if (this.addingsubTask) {
-      if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
-        this.addsubTask();
-      }
+    if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
+      this.addsubTask();
     }
     this.clearAddsubTask();
   }
 
   clearAddsubTask() {
-    this.addingsubTask = false;
     this.addsubTaskText = '';
   }
-
-
 }

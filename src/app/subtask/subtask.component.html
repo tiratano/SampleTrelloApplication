@@ -1,8 +1,7 @@
 <li class="subTask" 
     [attr.subTask-id]="subTask._id"
-    [attr.subTask-order]="subTask.order"
     (click)="editsubTask()">
-    <span [innerHtml]="subTask.title" [style.display]="editingsubTask ? 'none' : ''">
+    <span [style.display]="editingsubTask ? 'none' : ''">{{subTask.title}}
     </span>
     <textarea
         [style.display]="editingsubTask ? '' : 'none' "
