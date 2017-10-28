@@ -4,7 +4,7 @@ import { Task } from '../model/task';
 describe('Custom Sort pipe', () => {
     let pipe:CustomSort;
     let tasks: Task[];
-    let task: Task= new Task();
+
     beforeEach(() => {
         pipe = new CustomSort();
         tasks = [{title:"Basic",id:0,subtask:[],taskheaderId:"1"},
