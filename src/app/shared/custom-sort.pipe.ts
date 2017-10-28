@@ -7,8 +7,13 @@ import { Task } from '../model/task';
 })
 export class CustomSort implements PipeTransform {
 
-    transform(value: Task[], duplicate: boolean): Task[] {
+    transform(value: Task[], sort: boolean): Task[] {
+      if(sort){
         return value.sort(this.compare);
+      }
+      else{
+        return value;
+      }
     }
     private compare(a,b) {
         if (a.title < b.title)
