@@ -12,7 +12,6 @@ import { Board } from '../model/board'
 })
 export class BoardComponent implements OnInit {
   task: Task;
-  //boards: Board[];
   board: Board = new Board;
   errorMessage: string;
   addtaskText: string;
@@ -72,6 +71,7 @@ export class BoardComponent implements OnInit {
     if (event.keyCode === 13) {
       if (this.addtaskText && this.addtaskText.trim() !== '') {
         this.addtask();
+        this.updateBoardWidth();      
       } else {
         this.clearAddtask();
       }
@@ -88,16 +88,12 @@ export class BoardComponent implements OnInit {
     let newtask = <Task>{
       title: this.addtaskText,
       id: newID
-      // order: (this.board.task.length + 1) * 1000,
-      //boardId: this.board.id
-    };
+     };
     this.board.task.push(newtask);
-    this.updateBoardWidth();
     this.addtaskText = '';
 
   }
   updateBoardWidth() {
-    // this.boardWidth = ((this.board.task.length + (this.tasksAdded > 0 ? 1 : 2)) * 280) + 10;
     this.boardWidth = ((this.board.task.length + 1) * 280) + 10;
 
     if (this.boardWidth > document.body.scrollWidth) {
@@ -116,6 +112,7 @@ export class BoardComponent implements OnInit {
   addtaskOnBlur() {
     if (this.addtaskText && this.addtaskText.trim() !== '') {
       this.addtask();
+      this.updateBoardWidth();    
     }
     this.clearAddtask();
   }
