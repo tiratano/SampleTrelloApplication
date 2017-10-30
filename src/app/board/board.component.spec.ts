@@ -5,29 +5,15 @@ import { Board } from '../model/board'
 
 
 describe('BoardComponent', () => {
-  //let component: BoardComponent;
-  //let fixture: ComponentFixture<BoardComponent>;
   let boardComponent: BoardComponent;
   let mockElementRef,mockRoute,mockTrelloService;
 
- /* beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BoardComponent ]
-    })
-    .compileComponents();
-  }));*/
-
+ 
   beforeEach(() => {
-  //  fixture = TestBed.createComponent(BoardComponent);
-    //component = fixture.componentInstance;
-    //fixture.detectChanges();
     boardComponent = new BoardComponent(mockElementRef, mockRoute, mockTrelloService);
   });
 
-  it('should be created', () => {
-    //expect(component).toBeTruthy();
-  });
-
+ 
   it('test add new task to existing task',()=>{
     boardComponent.addtaskText = "Test task";
     boardComponent.board = new Board();

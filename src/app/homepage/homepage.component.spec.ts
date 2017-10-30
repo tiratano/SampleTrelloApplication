@@ -17,7 +17,7 @@ describe('HomepageComponent', () => {
       declarations: [ HomepageComponent ],
       imports:[RouterModule.forRoot([])],
       providers: [{provide: APP_BASE_HREF, useValue: '/'},
-                  {provide: TrelloService, useValue:mockTrelloService}]
+                  {provide: TrelloService, useValue:mockTrelloService}]            
     })
     .compileComponents();
   }));
@@ -48,11 +48,26 @@ describe('HomepageComponent', () => {
       
       fixture.detectChanges();
       const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('.title').textContent).toContain('Board 1');   
       let title = compiled.querySelectorAll('.title') ;
+      
+      expect(title[0].textContent).toContain('Board 1');
       expect(title[1].textContent).toContain('Board 2');      
-
-
-    expect(component.boards.length).toBe(2);
+      
+      expect(component.boards.length).toBe(2);
   });
+
+  it('create a new board',()=>{
+
+    component.addBoard();
+    fixture.detectChanges();
+    expect(component.boards.length).toBe(1);
+
+    const compiled = fixture.debugElement.nativeElement;
+    let title = compiled.querySelectorAll('.title') ;
+    expect(title.length).toBe(2);
+
+    expect(title[0].textContent).toContain('New Board');
+
+  });
+
 });

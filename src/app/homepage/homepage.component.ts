@@ -19,21 +19,15 @@ export class HomepageComponent implements OnInit {
   constructor(private _trelloService:TrelloService,private _router: Router) { }
 
   ngOnInit() {
-  //  this.boards =[];
 
    /* this._trelloService.getBoards()
                 .subscribe(boards => this.boards = boards,
                            error => this.errorMessage = <any>error);*/
-   // if(this._trelloService.Boards == undefined){
+   
           this._trelloService.getBoardsWithPromises()
                         .then(boards => this.boards = boards,
                           error => this.errorMessage = <any>error);
-               //   }
-    //else{
-      //this.boards = this._trelloService.Boards;
-    //}
-      //this.boards.push (this._trelloService.seedData());
-    //this.boards.push (this.seedData());
+    //this.boards.push (this._trelloService.seedData());
     
   }
 public addBoard(){
