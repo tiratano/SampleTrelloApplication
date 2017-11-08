@@ -6,6 +6,7 @@ export class SampleTrelloApplicationPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('h2')).getText();
   }
+
 }

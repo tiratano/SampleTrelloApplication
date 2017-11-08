@@ -19,16 +19,14 @@ describe('SubtaskComponent', () => {
   }));
 
   beforeEach(() => {
-  
     fixture = TestBed.createComponent(SubtaskComponent);
     component = fixture.componentInstance;
     component.subTask = new SubTask();
-    component.subTask.title ='Mock SubTask';
+    component.subTask.title = 'Mock SubTask';
     fixture.detectChanges();
   });
 
   it('should be created', () => {
-    
     expect(component).toBeTruthy();
   });
 });

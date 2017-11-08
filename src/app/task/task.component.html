@@ -1,6 +1,5 @@
 <div class="task" 
-    [attr.task-id]="task._id"
-    [attr.task-order]="task.order">
+    [attr.task-id]="task.id">
     <div class="task-header">
         <h4 
             [style.display]="editingtask ?'none' : '' "
@@ -11,7 +10,7 @@
             (keyup)="addtaskOnEnter($event)"
             [(ngModel)]="task.title" />
     </div>
-    <ul class="subTask-list" [attr.task-id]="task._id">
+    <ul class="subTask-list" [attr.task-id]="task.id">
         <li *ngFor="let subTask of subTasks | customSort">
             <app-subtask [subTask]="subTask"></app-subtask>
         </li>

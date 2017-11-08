@@ -18,8 +18,7 @@ export class SubtaskComponent implements OnInit {
   constructor(private el: ElementRef) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   blurOnEnter(event) {
     if (event.keyCode === 13) {
       event.target.blur();
