@@ -10,10 +10,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      imports:[RouterModule.forRoot([])], //add the router module here as well,
+      imports: [RouterModule.forRoot([])], // add the router module here as well,
       providers: [{provide: APP_BASE_HREF, useValue: '/'}]
-      
-      
+
+
     }).compileComponents();
   }));
 

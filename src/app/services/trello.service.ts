@@ -21,7 +21,7 @@ export class TrelloService {
     constructor(private _http: Http) {}
 
     getBoards(): Observable<Board[]> {
-        if(this.Boards == undefined){
+        if (this.Boards == undefined){
         return this._http.get(this._boardUrl)
             .map((response: Response) => <Board[]> response.json())
             .do(data => this.Boards = data )
@@ -35,19 +35,19 @@ export class TrelloService {
 
 
     getBoardsWithPromises(): Promise<Board[]> {
-        if(this.Boards == undefined){
+        if (this.Boards == undefined){
         return this._http.get(this._boardUrl).toPromise()
             .then((response: Response) => {
-                this.Boards = <Board[]>response.json(); 
+                this.Boards = <Board[]>response.json();
                 return <Board[]> response.json()   ;       } );
-          
+
         }
         else {
             return Promise.resolve(this.Boards);
         }
     }
-     
-    getTask(id:string): Observable<Task> {
+
+    getTask(id: string): Observable<Task> {
         return this._http.get(this._boardUrl)
             .map((response: Response) => <Board[]> response.json())
             //.filter(data => data[0].task[0].id === id)
@@ -55,36 +55,36 @@ export class TrelloService {
             .catch(this.handleError);
     }
     private handleError(error: Response) {
-        console.error("dd");
+        console.error('dd');
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
     public seedData(){
-        let temptask: Task = new Task();
-        let tempSubTask:SubTask =  new SubTask();
-        let board:Board=  new Board();
-    
+        const temptask: Task = new Task();
+        const tempSubTask: SubTask =  new SubTask();
+        const board: Board =  new Board();
+
         temptask.id = 1;
-        temptask.title = "Hello Task!!";
-        temptask.taskheaderId = "1";
-    
-        tempSubTask.id="1";
-        tempSubTask.title = "Hello Task Header!!";
-    
+        temptask.title = 'Hello Task!!';
+        temptask.taskheaderId = '1';
+
+        tempSubTask.id = '1';
+        tempSubTask.title = 'Hello Task Header!!';
+
         temptask.subtask = Array();
         temptask.subtask.push(tempSubTask);
-        
-        board.id=1;
-        board.title = "Hello Seed Board";
+
+        board.id = 1;
+        board.title = 'Hello Seed Board';
         board.task = new Array();
         board.task.push(temptask);
-        
+
 
         this.Boards = new Array();
         this.Boards.push(board);
 
         return board;
-        
+
       }
 
 }
