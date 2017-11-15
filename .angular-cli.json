@@ -10,7 +10,8 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "api/board/boards.json"
+        "api/board/boards.json",
+        "web.config"
       ],
       "index": "index.html",
       "main": "main.ts",
