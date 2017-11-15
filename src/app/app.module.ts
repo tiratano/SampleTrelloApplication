@@ -15,8 +15,8 @@ import {CustomSort } from './shared/custom-sort.pipe'
 
 
 const appRoutes: Routes = [
-  { path: 'board/:id', component: BoardComponent,pathMatch:"full" },
-  
+  { path: 'board/:id', component: BoardComponent, pathMatch: 'full' },
+
   { path: '', component: HomepageComponent },
 ];
 

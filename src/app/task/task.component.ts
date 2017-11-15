@@ -29,11 +29,11 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    let boardId = this._route.snapshot.params['id'];
+    const boardId = this._route.snapshot.params['id'];
     if (boardId != undefined) {
       this.boards = this._boardService.Boards;
       console.log(this.boards);
-      for (let v of this.boards) {
+      for (const v of this.boards) {
         if (v.id == boardId) {
           this.board = v;
           break;
@@ -52,11 +52,11 @@ export class TaskComponent implements OnInit {
 
   addsubTask() {
     this.subTasks = this.subTasks || [];
-    let newsubTask = <SubTask>{
+    const newsubTask = <SubTask>{
       title: this.addsubTaskText
     };
     let selectedtask: Task;
-    for (let v of this.board.task) {
+    for (const v of this.board.task) {
       if (v.id == this.task.id) {
         selectedtask = v;
         break;
@@ -99,7 +99,7 @@ export class TaskComponent implements OnInit {
   edittask() {
     this.currentTitle = this.task.title;
     this.editingtask = true;
-    let input = this.el.nativeElement
+    const input = this.el.nativeElement
       .getElementsByClassName('task-header')[0]
       .getElementsByTagName('input')[0];
 
@@ -107,7 +107,7 @@ export class TaskComponent implements OnInit {
   }
 
   enableAddsubTask() {
-    let input = this.el.nativeElement
+    const input = this.el.nativeElement
       .getElementsByClassName('add-subTask')[0]
       .getElementsByTagName('input')[0];
 

@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
   errorMessage: string;
   addtaskText: string;
   boardWidth: number;
-  tasksAdded: number = 0;
+  tasksAdded = 0;
 
   editingTitle = false;
   currentTitle: string;
@@ -24,20 +24,20 @@ export class BoardComponent implements OnInit {
   constructor(public el: ElementRef, private _route: ActivatedRoute, private _trelloService: TrelloService) { }
 
   ngOnInit() {
-    let boardId = this._route.snapshot.params['id'];
+    const boardId = this._route.snapshot.params['id'];
     console.log(boardId);
     this.board = this._trelloService.Boards.find(x => x.id == boardId);
   }
 
   addsubTask(event) {
-    console.log("Event Fired");
+    console.log('Event Fired');
     console.log(event);
   }
   editTitle() {
     this.currentTitle = this.board.title;
     this.editingTitle = true;
 
-    let input = this.el.nativeElement
+    const input = this.el.nativeElement
       .getElementsByClassName('board-title')[0]
       .getElementsByTagName('input')[0];
 
@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
   }
 
   enableAddtask() {
-    let input = this.el.nativeElement
+    const input = this.el.nativeElement
       .getElementsByClassName('add-task')[0]
       .getElementsByTagName('input')[0];
 
@@ -55,7 +55,7 @@ export class BoardComponent implements OnInit {
   updateBoard() {
 
     this.editingTitle = false;
-    document.title = this.board.title + " | Generic Task Manager";
+    document.title = this.board.title + ' | Generic Task Manager';
     this._trelloService.Boards.find(x => x.id == this.board.id).title = this.board.title;
   }
   blurOnEnter(event) {
@@ -71,7 +71,7 @@ export class BoardComponent implements OnInit {
     if (event.keyCode === 13) {
       if (this.addtaskText && this.addtaskText.trim() !== '') {
         this.addtask();
-        this.updateBoardWidth();      
+        this.updateBoardWidth();
       } else {
         this.clearAddtask();
       }
@@ -84,8 +84,8 @@ export class BoardComponent implements OnInit {
     this.addtaskText = '';
   }
   addtask() {
-    let newID = this.board.task.length + 1;
-    let newtask = <Task>{
+    const newID = this.board.task.length + 1;
+    const newtask = <Task>{
       title: this.addtaskText,
       id: newID
      };
@@ -103,7 +103,7 @@ export class BoardComponent implements OnInit {
     }
 
     if (this.tasksAdded > 0) {
-      let wrapper = document.getElementById('content-wrapper');
+      const wrapper = document.getElementById('content-wrapper');
       wrapper.scrollLeft = wrapper.scrollWidth;
     }
 
@@ -112,7 +112,7 @@ export class BoardComponent implements OnInit {
   addtaskOnBlur() {
     if (this.addtaskText && this.addtaskText.trim() !== '') {
       this.addtask();
-      this.updateBoardWidth();    
+      this.updateBoardWidth();
     }
     this.clearAddtask();
   }

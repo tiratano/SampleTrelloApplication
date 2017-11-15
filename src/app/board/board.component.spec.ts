@@ -6,25 +6,25 @@ import { Board } from '../model/board'
 
 describe('BoardComponent', () => {
   let boardComponent: BoardComponent;
-  let mockElementRef,mockRoute,mockTrelloService;
+  let mockElementRef, mockRoute, mockTrelloService;
 
- 
+
   beforeEach(() => {
     boardComponent = new BoardComponent(mockElementRef, mockRoute, mockTrelloService);
   });
 
- 
-  it('test add new task to existing task',()=>{
-    boardComponent.addtaskText = "Test task";
+
+  it('test add new task to existing task', () => {
+    boardComponent.addtaskText = 'Test task';
     boardComponent.board = new Board();
     boardComponent.board.id = 1;
-    boardComponent.board.title = "Board 1";
+    boardComponent.board.title = 'Board 1';
     boardComponent.board.task =  new Array();
     boardComponent.board.task.push({
-                id:1,
-                title:'task1',
+                id: 1,
+                title: 'task1',
                 subtask: [],
-                taskheaderId:"1"});
+                taskheaderId: '1'});
 
     boardComponent.addtask();
 
@@ -32,13 +32,13 @@ describe('BoardComponent', () => {
   });
 
 
-  it('test add first task ',()=>{
-    boardComponent.addtaskText = "Test task";
+  it('test add first task ', () => {
+    boardComponent.addtaskText = 'Test task';
     boardComponent.board = new Board();
     boardComponent.board.id = 1;
-    boardComponent.board.title = "Board 1";
+    boardComponent.board.title = 'Board 1';
     boardComponent.board.task =  new Array();
-    
+
     boardComponent.addtask();
 
     expect(boardComponent.board.task.length).toBe(1);
