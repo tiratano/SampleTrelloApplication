@@ -1,0 +1,42 @@
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+
+nav {
+  background-color: rgb(81, 118, 119);
+  padding: 5px;
+  height: 30px;
+}
+
+nav a {
+  float: left;  
+  color: white; 
+}
+
+nav a.btn {
+  background-color:rgb(173, 51, 102);
+  width: 80px;
+}
+
+nav a.logo{
+  line-height: 30px;
+  font-weight: bold;
+  color:white;
+  width: calc(100% - 200px);
+  text-align: center;
+  /*margin-top: -30px;*/
+}
+
+
+#content-wrapper {
+  width: 100%;
+  display: block;
+  height: calc(100% - 40px);
+  /*overflow: auto;*/
+  padding-top: 40px;
+  background-color: rgb(147, 191, 192);
+}
+

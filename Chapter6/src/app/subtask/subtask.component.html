@@ -1,0 +1,11 @@
+<li class="subTask" 
+    [attr.subTask-id]="subTask.id"
+    (click)="editsubTask()">
+    <span [style.display]="editingsubTask ? 'none' : ''">{{subTask.title}}
+    </span>
+    <textarea
+        [style.display]="editingsubTask ? '' : 'none' "
+        (keydown)="blurOnEnter($event)"
+        (blur)="updatesubTask()"
+        [(ngModel)]="subTask.title" ></textarea>
+</li>

@@ -1,0 +1,26 @@
+<div class="task" 
+    [attr.task-id]="task.id">
+    <div class="task-header">
+        <h4 
+            [style.display]="editingtask ?'none' : '' "
+            (click)="edittask()" >{{task.title | uppercase}}</h4>
+        <input  
+            [style.display]="editingtask ?'' : 'none' "
+            (blur)="updatetaskOnBlur()"
+            (keyup)="addtaskOnEnter($event)"
+            [(ngModel)]="task.title" />
+    </div>
+    <ul class="subTask-list" [attr.task-id]="task.id">
+        <li *ngFor="let subTask of subTasks | customSort">
+            <app-subtask [subTask]="subTask"></app-subtask>
+        </li>
+    </ul>
+        <div class="add-subTask" 
+            (click)="enableAddsubTask()" >
+          <input  
+            (keyup)="addsubTaskOnEnter($event)"
+            (blur)="addsubTaskOnBlur()"
+            [(ngModel)]="addsubTaskText"
+            placeholder="Add a new SubTask" />
+        </div>
+</div>
