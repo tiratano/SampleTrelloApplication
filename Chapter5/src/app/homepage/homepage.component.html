@@ -1,13 +1,13 @@
 <div class="boards-wrapper">
-  <h2>Boards</h2>
+  <h2>보드</h2>
   <div id="boards">
     <a class="board" *ngFor="let board of boards" [routerLink]="['/board', board.id]">
       <span class="title">{{board?.title}}:
-        <label style="font-size: smaller">Total Task: {{board?.task.length}}</label>
+        <label style="font-size: smaller">작업 합계: {{board?.task.length}}</label>
       </span>
     </a>
     <a href="#" class="board add-board" (click)="addBoard()">
-      <span class="title">Create a new board...</span>
+      <span class="title">새로운 보드 만들기...</span>
     </a>
   </div>
 </div>

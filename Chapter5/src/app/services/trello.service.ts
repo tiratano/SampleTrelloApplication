@@ -19,17 +19,17 @@ export class TrelloService {
         const board: Board =  new Board();
 
         temptask.id = 1;
-        temptask.title = 'Hello Task!!';
+        temptask.title = 'Hello 작업!!';
         temptask.taskheaderId = '1';
 
         tempSubTask.id = '1';
-        tempSubTask.title = 'Hello Task Header!!';
+        tempSubTask.title = 'Hello 작업 헤더!!';
 
         temptask.subtask = Array();
         temptask.subtask.push(tempSubTask);
 
         board.id = 1;
-        board.title = 'Hello Seed Board';
+        board.title = 'Hello 보드';
         board.task = new Array();
         board.task.push(temptask);
 

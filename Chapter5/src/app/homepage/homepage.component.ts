@@ -26,7 +26,7 @@ public addBoard(){
     let newBoard:Board= new Board;
     newBoard.id = this.boards.length + 1
     newBoard.task = Array();
-    newBoard.title = "New Board";
+    newBoard.title = "새 보드";
     this.boards.push(newBoard);
     console.log('new board added');
   }
